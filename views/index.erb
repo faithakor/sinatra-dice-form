@@ -1,0 +1,36 @@
+
+<<!DOCTYPE html>
+<html>
+  <head>
+    <title>Target: Dice Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+
+  <body>
+    <h1>Dice Roll</h1>
+
+    <% if rolls %>  <!-- If the rolls array exists (after form submission) -->
+      <h1><%= "#{dice}d#{sides}" %></h1>
+
+      <ol>
+        <% rolls.each do |roll| %>
+          <li><em>Result:</em> <strong><%= roll %></strong></li>
+        <% end %>
+      </ol>
+
+      <a href="/">Go back home</a> | 
+      <a href="/process_roll?dice=<%= dice %>&sides=<%= sides %>">Roll again</a>
+    <% else %>  <!-- If no rolls array, show the form -->
+      <form action="/process_roll" method="get">
+        <label for="dice_field">Number of dice to roll?</label>
+        <input id="dice_field" type="text" name="dice">
+
+        <label for="sides_field">How many sides per die?</label>
+        <input id="sides_field" type="text" name="sides">
+
+        <button>Roll!</button>
+      </form>
+    <% end %>
+  </body>
+</html>
